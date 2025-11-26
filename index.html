@@ -60,6 +60,14 @@
   animation-play-state: paused;
   cursor: pointer;
 }
+        @keyframes scroll-left {
+  0% {
+    transform: translateX(100%);  /* mulai dari kanan */
+  }
+  100% {
+    transform: translateX(-100%); /* keluar di kiri */
+  }
+}
 
     </style>
 </head>
@@ -638,14 +646,7 @@
     index = (index + 1) % quotes.length;
   }
     
-@keyframes scroll-left {
-  0% {
-    transform: translateX(100%);  /* mulai dari kanan */
-  }
-  100% {
-    transform: translateX(-100%); /* keluar di kiri */
-  }
-}
+
 
 
   // ganti quote tiap 5 detik
