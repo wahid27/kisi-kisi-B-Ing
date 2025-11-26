@@ -36,6 +36,31 @@
             th, td { border: 1px solid black !important; padding: 5px; }
             th { background-color: #f3f4f6 !important; -webkit-print-color-adjust: exact; }
         }
+            /* ================== MARQUEE CENTER ================== */
+.marquee-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;        /* posisi ke tengah */
+  background: #eef6ff;
+  padding: 8px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.marquee {
+  font-weight: bold;
+  font-size: 16px;
+  white-space: nowrap;
+  display: inline-block;
+  animation: scroll-left 18s linear infinite;
+}
+
+.marquee-wrap:hover .marquee {
+  animation-play-state: paused;
+  cursor: pointer;
+}
+
     </style>
 </head>
 <body class="p-4 md:p-8 text-slate-800">
@@ -74,30 +99,6 @@
     ✨ Jangan panik lihat kisi-kisi... paniklah kalau belum belajar. ✨
   </div>
 </div>
-    /* ================== MARQUEE CENTER ================== */
-.marquee-wrap {
-  width: 100%;
-  display: flex;
-  justify-content: center;        /* posisi ke tengah */
-  background: #eef6ff;
-  padding: 8px 0;
-  border-radius: 8px;
-  overflow: hidden;
-  margin: 10px 0;
-}
-
-.marquee {
-  font-weight: bold;
-  font-size: 16px;
-  white-space: nowrap;
-  display: inline-block;
-  animation: scroll-left 18s linear infinite;
-}
-
-.marquee-wrap:hover .marquee {
-  animation-play-state: paused;
-  cursor: pointer;
-}
 
         <!-- Toolbar -->
         <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
