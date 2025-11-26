@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kisi-Kisi SAS Bahasa Inggris - MTs Al Istiqomah</title>
+    <title>Kisi-Kisi & Latihan SAS Inggris - MTs Al Istiqomah</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
@@ -19,59 +19,41 @@
         }
 
         /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #818cf8; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #6366f1; 
-        }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #818cf8; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
 
         /* Animations */
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        .slide-up { opacity: 0; animation: slideUp 0.6s ease-out forwards; }
         
-        .slide-up {
-            opacity: 0;
-            animation: slideUp 0.6s ease-out forwards;
-        }
-
-        /* Staggered Delay for Table Rows */
-        tr:nth-child(1) { animation-delay: 0.1s; }
-        tr:nth-child(2) { animation-delay: 0.15s; }
-        tr:nth-child(3) { animation-delay: 0.2s; }
-        tr:nth-child(4) { animation-delay: 0.25s; }
-        tr:nth-child(5) { animation-delay: 0.3s; }
-        tr:nth-child(6) { animation-delay: 0.35s; }
-        tr:nth-child(7) { animation-delay: 0.4s; }
-        tr:nth-child(8) { animation-delay: 0.45s; }
-        tr:nth-child(9) { animation-delay: 0.5s; }
-        tr:nth-child(10) { animation-delay: 0.55s; }
-        /* Add more delays via JS if needed for longer lists, but this covers the fold */
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         .glass-panel {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        }
+
+        /* Modal Styles */
+        .modal {
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-content {
+            transform: scale(0.95);
+            transition: transform 0.3s ease-in-out;
+        }
+        .modal.active .modal-content {
+            transform: scale(1);
         }
 
         /* Print Styles */
@@ -112,22 +94,10 @@
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm border-t border-slate-200 pt-4">
-                <div>
-                    <span class="block text-slate-400 text-xs">Hari / Tanggal</span>
-                    <span class="font-medium">Sesuai Jadwal</span>
-                </div>
-                <div>
-                    <span class="block text-slate-400 text-xs">Waktu</span>
-                    <span class="font-medium">90 Menit</span>
-                </div>
-                <div>
-                    <span class="block text-slate-400 text-xs">Jumlah Soal</span>
-                    <span class="font-medium">45 Butir</span>
-                </div>
-                <div>
-                    <span class="block text-slate-400 text-xs">Kurikulum</span>
-                    <span class="font-medium">Merdeka</span>
-                </div>
+                <div><span class="block text-slate-400 text-xs">Hari / Tanggal</span><span class="font-medium">Sesuai Jadwal</span></div>
+                <div><span class="block text-slate-400 text-xs">Waktu</span><span class="font-medium">90 Menit</span></div>
+                <div><span class="block text-slate-400 text-xs">Jumlah Soal</span><span class="font-medium">45 Butir</span></div>
+                <div><span class="block text-slate-400 text-xs">Kurikulum</span><span class="font-medium">Merdeka</span></div>
             </div>
         </div>
 
@@ -135,7 +105,7 @@
         <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-6 fade-in" style="animation-delay: 0.2s;">
             <div class="relative w-full md:w-96">
                 <i class="fas fa-search absolute left-4 top-3.5 text-slate-400"></i>
-                <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Cari materi (misal: Narrative, Passive)..." 
+                <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Cari materi..." 
                     class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-400 shadow-sm transition-all">
             </div>
             <button onclick="window.print()" class="no-print bg-slate-800 hover:bg-slate-700 text-white px-6 py-3 rounded-xl shadow-lg transition-all flex items-center gap-2 transform hover:scale-105 active:scale-95">
@@ -152,271 +122,306 @@
                             <th class="p-4 font-semibold text-center w-16">No</th>
                             <th class="p-4 font-semibold w-1/4">Materi / Genre</th>
                             <th class="p-4 font-semibold">Indikator Soal</th>
-                            <th class="p-4 font-semibold text-center w-24">Bentuk</th>
                             <th class="p-4 font-semibold text-center w-20">No. Soal</th>
+                            <!-- Kolom baru untuk tombol latihan -->
+                            <th class="p-4 font-semibold text-center w-24 no-print">Latihan</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100 text-sm text-slate-600">
-                        <!-- Group 1: Descriptive -->
+                        
+                        <!-- Row 1: Elephant -->
                         <tr class="hover:bg-indigo-50/50 transition-colors slide-up">
                             <td class="p-4 text-center font-bold text-slate-400">1</td>
                             <td class="p-4 font-medium text-slate-800">
                                 <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs mr-2">Reading</span>
                                 Descriptive Text
-                                <div class="text-xs text-slate-500 mt-1">Tema: Sumatran Elephant</div>
                             </td>
-                            <td class="p-4">Disajikan teks deskriptif, siswa dapat mengidentifikasi ciri-ciri fisik hewan tersebut.</td>
-                            <td class="p-4 text-center"><span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs font-bold">PG</span></td>
+                            <td class="p-4">Disajikan teks deskriptif (Sumatran Elephant), siswa dapat mengidentifikasi ciri-ciri fisik hewan tersebut.</td>
                             <td class="p-4 text-center font-bold">1</td>
-                        </tr>
-                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up">
-                            <td class="p-4 text-center font-bold text-slate-400">2</td>
-                            <td class="p-4 font-medium text-slate-800">Descriptive Text</td>
-                            <td class="p-4">Menentukan informasi rinci tersurat (makanan hewan).</td>
-                            <td class="p-4 text-center"><span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs font-bold">PG</span></td>
-                            <td class="p-4 text-center font-bold">2</td>
-                        </tr>
-                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up">
-                            <td class="p-4 text-center font-bold text-slate-400">3</td>
-                            <td class="p-4 font-medium text-slate-800">Descriptive Text</td>
-                            <td class="p-4">Menentukan rujukan kata/makna frasa sifat dalam konteks kalimat.</td>
-                            <td class="p-4 text-center"><span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs font-bold">PG</span></td>
-                            <td class="p-4 text-center font-bold">3</td>
-                        </tr>
-                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up">
-                            <td class="p-4 text-center font-bold text-slate-400">4</td>
-                            <td class="p-4 font-medium text-slate-800">Descriptive Text</td>
-                            <td class="p-4">Menentukan lokasi/habitat berdasarkan teks.</td>
-                            <td class="p-4 text-center"><span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs font-bold">PG</span></td>
-                            <td class="p-4 text-center font-bold">4</td>
-                        </tr>
-                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up">
-                            <td class="p-4 text-center font-bold text-slate-400">5</td>
-                            <td class="p-4 font-medium text-slate-800">Vocabulary</td>
-                            <td class="p-4">Menentukan sinonim kata <i>"Endangered"</i>.</td>
-                            <td class="p-4 text-center"><span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs font-bold">PG</span></td>
-                            <td class="p-4 text-center font-bold">5</td>
+                            <td class="p-4 text-center no-print">
+                                <button onclick="openQuestion(1)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow transition-all active:scale-95" title="Kerjakan Latihan Soal">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </td>
                         </tr>
 
-                        <!-- Group 2: Report/Descriptive -->
-                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up">
-                            <td class="p-4 text-center font-bold text-slate-400">6</td>
-                            <td class="p-4 font-medium text-slate-800">
-                                <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs mr-2">Reading</span>
-                                Report / Descriptive
-                                <div class="text-xs text-slate-500 mt-1">Tema: Komodo Dragon</div>
-                            </td>
-                            <td class="p-4">Mengklasifikasikan jenis hewan berdasarkan deskripsi.</td>
-                            <td class="p-4 text-center"><span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs font-bold">PG</span></td>
-                            <td class="p-4 text-center font-bold">6</td>
-                        </tr>
-                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up">
-                            <td class="p-4 text-center font-bold text-slate-400">7</td>
-                            <td class="p-4 font-medium text-slate-800">Report Text</td>
-                            <td class="p-4">Menemukan informasi spesifik mengenai habitat hewan.</td>
-                            <td class="p-4 text-center"><span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs font-bold">PG</span></td>
-                            <td class="p-4 text-center font-bold">7</td>
-                        </tr>
-                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up">
-                            <td class="p-4 text-center font-bold text-slate-400">8</td>
-                            <td class="p-4 font-medium text-slate-800">
-                                <span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded text-xs mr-2">Grammar</span>
-                                Tenses
-                            </td>
-                            <td class="p-4">Mengidentifikasi jenis Tense yang digunakan (Simple Present).</td>
-                            <td class="p-4 text-center"><span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs font-bold">PG</span></td>
-                            <td class="p-4 text-center font-bold">8</td>
-                        </tr>
-                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up">
-                            <td class="p-4 text-center font-bold text-slate-400">9</td>
-                            <td class="p-4 font-medium text-slate-800">Grammar</td>
-                            <td class="p-4">Menggunakan <i>Preposition of Place</i> (in/on/at) dengan tepat.</td>
-                            <td class="p-4 text-center"><span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs font-bold">PG</span></td>
-                            <td class="p-4 text-center font-bold">9</td>
-                        </tr>
-                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up">
-                            <td class="p-4 text-center font-bold text-slate-400">10</td>
-                            <td class="p-4 font-medium text-slate-800">Grammar</td>
-                            <td class="p-4">Mengidentifikasi kalimat berbentuk <i>Passive Voice</i>.</td>
-                            <td class="p-4 text-center"><span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs font-bold">PG</span></td>
-                            <td class="p-4 text-center font-bold">10</td>
-                        </tr>
-
-                        <!-- Group 3: Recount -->
-                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up">
-                            <td class="p-4 text-center font-bold text-slate-400">11</td>
-                            <td class="p-4 font-medium text-slate-800">
-                                <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs mr-2">Reading</span>
-                                Recount Text
-                                <div class="text-xs text-slate-500 mt-1">Tema: Holiday (Borobudur)</div>
-                            </td>
-                            <td class="p-4">Menentukan latar waktu kejadian (Time Signal).</td>
-                            <td class="p-4 text-center"><span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs font-bold">PG</span></td>
-                            <td class="p-4 text-center font-bold">11</td>
-                        </tr>
-                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up">
+                        <!-- Row 2: Weather (Borobudur) -->
+                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up" style="animation-delay: 0.15s">
                             <td class="p-4 text-center font-bold text-slate-400">12</td>
-                            <td class="p-4 font-medium text-slate-800">Recount Text</td>
-                            <td class="p-4">Mengidentifikasi informasi rinci tentang cuaca/suasana.</td>
-                            <td class="p-4 text-center"><span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs font-bold">PG</span></td>
-                            <td class="p-4 text-center font-bold">12</td>
-                        </tr>
-                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up">
-                            <td class="p-4 text-center font-bold text-slate-400">13-15</td>
-                            <td class="p-4 font-medium text-slate-800">Grammar Focus</td>
-                            <td class="p-4">
-                                <ul class="list-disc pl-4 space-y-1">
-                                    <li>Mengidentifikasi Tense dari Kata Kerja V2 (Took).</li>
-                                    <li>Menentukan nama Tense pada kalimat lampau.</li>
-                                    <li>Memilih kalimat dengan pola <i>Past Continuous Tense</i>.</li>
-                                </ul>
-                            </td>
-                            <td class="p-4 text-center"><span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs font-bold">PG</span></td>
-                            <td class="p-4 text-center font-bold">13-15</td>
-                        </tr>
-
-                        <!-- Group 4: Recount 2 -->
-                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up">
-                            <td class="p-4 text-center font-bold text-slate-400">16-18</td>
                             <td class="p-4 font-medium text-slate-800">
                                 <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs mr-2">Reading</span>
                                 Recount Text
-                                <div class="text-xs text-slate-500 mt-1">Tema: Village Visit</div>
                             </td>
-                            <td class="p-4">
-                                <ul class="list-disc pl-4 space-y-1">
-                                    <li>Menentukan aktivitas penulis di desa.</li>
-                                    <li>Menentukan aktivitas lampau yang sedang berlangsung (Continuous).</li>
-                                    <li>Menyimpulkan perasaan penulis (Inference).</li>
-                                </ul>
+                            <td class="p-4">Mengidentifikasi informasi rinci tentang cuaca/suasana (Borobudur Trip).</td>
+                            <td class="p-4 text-center font-bold">12</td>
+                            <td class="p-4 text-center no-print">
+                                <button onclick="openQuestion(12)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow transition-all active:scale-95">
+                                    <i class="fas fa-edit"></i>
+                                </button>
                             </td>
-                            <td class="p-4 text-center"><span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs font-bold">PG</span></td>
-                            <td class="p-4 text-center font-bold">16-18</td>
-                        </tr>
-                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up">
-                            <td class="p-4 text-center font-bold text-slate-400">19-20</td>
-                            <td class="p-4 font-medium text-slate-800">Grammar Focus</td>
-                            <td class="p-4">
-                                <ul class="list-disc pl-4 space-y-1">
-                                    <li>Identifikasi Past Continuous Tense.</li>
-                                    <li>Mengubah kalimat aktif ke <i>Passive Voice</i>.</li>
-                                </ul>
-                            </td>
-                            <td class="p-4 text-center"><span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs font-bold">PG</span></td>
-                            <td class="p-4 text-center font-bold">19-20</td>
                         </tr>
 
-                         <!-- Group 5: Narrative -->
-                         <tr class="hover:bg-indigo-50/50 transition-colors slide-up">
-                            <td class="p-4 text-center font-bold text-slate-400">21-25</td>
+                        <!-- Row 3: Moral (Golden Egg) -->
+                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up" style="animation-delay: 0.2s">
+                            <td class="p-4 text-center font-bold text-slate-400">25</td>
                             <td class="p-4 font-medium text-slate-800">
                                 <span class="bg-orange-100 text-orange-700 px-2 py-0.5 rounded text-xs mr-2">Literacy</span>
                                 Narrative Text
-                                <div class="text-xs text-slate-500 mt-1">Tema: The Golden Egg</div>
                             </td>
-                            <td class="p-4">
-                                <ul class="list-disc pl-4 space-y-1">
-                                    <li>Mengidentifikasi objek utama cerita.</li>
-                                    <li>Menentukan sebab-akibat dalam plot cerita.</li>
-                                    <li>Identifikasi Tense dominan dalam Naratif.</li>
-                                    <li>Menentukan konflik utama.</li>
-                                    <li>Menentukan pesan moral (Moral Value).</li>
-                                </ul>
+                            <td class="p-4">Menentukan pesan moral (Moral Value) dari teks naratif (The Golden Egg).</td>
+                            <td class="p-4 text-center font-bold">25</td>
+                            <td class="p-4 text-center no-print">
+                                <button onclick="openQuestion(25)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow transition-all active:scale-95">
+                                    <i class="fas fa-edit"></i>
+                                </button>
                             </td>
-                            <td class="p-4 text-center"><span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs font-bold">PG</span></td>
-                            <td class="p-4 text-center font-bold">21-25</td>
                         </tr>
 
-                        <!-- Group 6: Grammar Drill -->
-                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up">
-                            <td class="p-4 text-center font-bold text-slate-400">26-40</td>
+                        <!-- Row 4: Grammar (Passive) -->
+                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up" style="animation-delay: 0.25s">
+                            <td class="p-4 text-center font-bold text-slate-400">36</td>
                             <td class="p-4 font-medium text-slate-800">
-                                <span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded text-xs mr-2">Structure</span>
-                                Grammar Drill
+                                <span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded text-xs mr-2">Grammar</span>
+                                Passive Voice
                             </td>
-                            <td class="p-4">
-                                Melengkapi kalimat rumpang dengan struktur yang tepat:
-                                <ul class="list-disc pl-4 space-y-1 mt-2 text-xs md:text-sm text-slate-500">
-                                    <li>Simple Present Tense (Daily routine/Habit) - No. 26, 31</li>
-                                    <li>Simple Past Tense (Past events) - No. 27, 34</li>
-                                    <li>Passive Voice (Past form) - No. 28, 33, 36, 40</li>
-                                    <li>Passive Voice (Present form) - No. 30, 38</li>
-                                    <li>Past Continuous Tense (While/When) - No. 29, 32, 37</li>
-                                    <li>Present Continuous Tense (Now) - No. 35</li>
-                                    <li>Conditional Sentence Type 2 (If I had...) - No. 39</li>
-                                </ul>
+                            <td class="p-4">Melengkapi kalimat rumpang dengan struktur Passive Voice (Past form).</td>
+                            <td class="p-4 text-center font-bold">36</td>
+                            <td class="p-4 text-center no-print">
+                                <button onclick="openQuestion(36)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow transition-all active:scale-95">
+                                    <i class="fas fa-edit"></i>
+                                </button>
                             </td>
-                            <td class="p-4 text-center"><span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs font-bold">PG</span></td>
-                            <td class="p-4 text-center font-bold">26-40</td>
                         </tr>
 
-                        <!-- Group 7: Essay -->
-                        <tr class="bg-indigo-100/50 hover:bg-indigo-100 transition-colors slide-up border-l-4 border-indigo-500">
-                            <td class="p-4 text-center font-bold text-slate-400">41-45</td>
+                        <!-- Row 5: Essay -->
+                        <tr class="bg-indigo-100/50 hover:bg-indigo-100 transition-colors slide-up border-l-4 border-indigo-500" style="animation-delay: 0.3s">
+                            <td class="p-4 text-center font-bold text-slate-400">41</td>
                             <td class="p-4 font-medium text-slate-800">
                                 <span class="bg-red-100 text-red-700 px-2 py-0.5 rounded text-xs mr-2">Writing</span>
-                                Essay / Uraian
+                                Essay
                             </td>
-                            <td class="p-4">
-                                Melengkapi kalimat rumpang secara gramatikal:
-                                <ul class="list-disc pl-4 space-y-1 mt-2">
-                                    <li><b>Passive Voice (Present):</b> Konteks pelestarian hewan.</li>
-                                    <li><b>Past Continuous:</b> Konteks kejadian bersamaan (Storm/Hiking).</li>
-                                    <li><b>Passive Voice (Past):</b> Konteks legenda/sejarah.</li>
-                                    <li><b>Passive Voice (Present):</b> Konteks hukum/larangan.</li>
-                                    <li><b>Past Continuous:</b> Konteks 'While' (Events in progress).</li>
-                                </ul>
+                            <td class="p-4">Melengkapi kalimat rumpang (Uraian) dengan Passive Voice konteks pelestarian.</td>
+                            <td class="p-4 text-center font-bold">41</td>
+                            <td class="p-4 text-center no-print">
+                                <button onclick="openQuestion(41)" class="bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded-lg shadow transition-all active:scale-95">
+                                    <i class="fas fa-pen-fancy"></i>
+                                </button>
                             </td>
-                            <td class="p-4 text-center"><span class="bg-indigo-600 text-white px-2 py-1 rounded text-xs font-bold">ESSAY</span></td>
-                            <td class="p-4 text-center font-bold">41-45</td>
                         </tr>
 
                     </tbody>
                 </table>
             </div>
-            
-            <!-- Footer in Table -->
-            <div class="p-4 bg-slate-50 border-t border-slate-200 text-xs text-center text-slate-500">
-                &copy; 2025 MGMP Bahasa Inggris MTs Al Istiqomah. Dokumen Rahasia Sekolah.
+             <div class="p-4 bg-slate-50 border-t border-slate-200 text-xs text-center text-slate-500">
+                &copy; 2025 MGMP Bahasa Inggris MTs Al Istiqomah.
             </div>
         </div>
+    </div>
 
-        <!-- Signature Area (Visible on Print) -->
-        <div class="mt-12 hidden print:flex justify-between px-8 text-center">
-            <div>
-                <p>Mengetahui,</p>
-                <p class="mb-16">Kepala Madrasah</p>
-                <p class="font-bold border-b border-black inline-block">Nama Kepala Sekolah, S.Pd.I</p>
-                <p>NIP. .......................</p>
+    <!-- MODAL POPUP (Hidden by default) -->
+    <div id="quizModal" class="modal fixed inset-0 z-50 flex items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeModal()"></div>
+        
+        <!-- Content -->
+        <div class="modal-content relative bg-white w-full max-w-lg rounded-2xl shadow-2xl p-6 md:p-8">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+
+            <!-- Question Header -->
+            <div class="mb-6">
+                <span id="qType" class="text-xs font-bold tracking-wider uppercase text-indigo-500 mb-1 block">Tipe Soal</span>
+                <h3 id="qText" class="text-lg md:text-xl font-bold text-slate-800 leading-relaxed">
+                    <!-- Soal akan muncul di sini -->
+                </h3>
             </div>
-            <div>
-                <p>Ponorogo, November 2025</p>
-                <p class="mb-16">Guru Mata Pelajaran</p>
-                <p class="font-bold border-b border-black inline-block">Nama Guru, S.Pd.</p>
-                <p>NIP. .......................</p>
+
+            <!-- Options Container -->
+            <div id="optionsContainer" class="space-y-3">
+                <!-- Pilihan jawaban akan digenerate via JS -->
+            </div>
+
+            <!-- Feedback Area -->
+            <div id="feedback" class="hidden mt-4 p-4 rounded-xl text-center font-bold"></div>
+
+             <!-- Essay Check -->
+            <div id="essayContainer" class="hidden space-y-4">
+                 <textarea id="essayInput" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500" placeholder="Ketik jawabanmu..."></textarea>
+                 <button onclick="checkEssay()" class="w-full bg-indigo-600 text-white py-2 rounded-lg font-bold hover:bg-indigo-700">Cek Jawaban</button>
             </div>
         </div>
-
     </div>
 
     <script>
-        // Simple Search Filter Script
+        // --- DATA BANK SOAL ---
+        const questionBank = {
+            1: {
+                type: "Pilihan Ganda - Descriptive Text",
+                text: "The Sumatran elephant is smaller than other Asian elephants. It has gray skin, large ears, and a long trunk.<br><br><b>Question:</b> What does the Sumatran elephant look like?",
+                options: [
+                    "A. It is big and green",
+                    "B. It is small and gray",
+                    "C. It is brown and furry",
+                    "D. It is black and short"
+                ],
+                correctIndex: 1, // 0=A, 1=B, 2=C, 3=D
+                isEssay: false
+            },
+            12: {
+                type: "Pilihan Ganda - Recount Text",
+                text: "Last week, my family went to Borobudur Temple... The weather was sunny and bright.<br><br><b>Question:</b> What was the weather like?",
+                options: [
+                    "A. Rainy",
+                    "B. Cloudy",
+                    "C. Sunny and bright",
+                    "D. Windy"
+                ],
+                correctIndex: 2,
+                isEssay: false
+            },
+            25: {
+                type: "Pilihan Ganda - Narrative Text",
+                text: "The farmer became rich, but one day he killed the hen because he was greedy. After that, no golden eggs appeared again.<br><br><b>Question:</b> The moral of the story is ____.",
+                options: [
+                    "A. Don’t be greedy",
+                    "B. Work harder",
+                    "C. Be brave",
+                    "D. Always study"
+                ],
+                correctIndex: 0,
+                isEssay: false
+            },
+            36: {
+                type: "Grammar Drill - Passive Voice",
+                text: "The window ______ by the wind last night.",
+                options: [
+                    "A. broke",
+                    "B. was broken",
+                    "C. is broken",
+                    "D. breaks"
+                ],
+                correctIndex: 1,
+                isEssay: false
+            },
+            41: {
+                type: "Uraian / Essay",
+                text: "Complete the sentence with correct Passive Voice:<br><br>The rare Javan rhinoceros ______ (protect) by the government to prevent extinction.",
+                correctAnswer: "is protected",
+                isEssay: true
+            }
+        };
+
+        // --- LOGIC ---
+        let currentQ = null;
+
+        function openQuestion(id) {
+            const data = questionBank[id];
+            if (!data) return; // Jika soal belum ada
+            
+            currentQ = data;
+            
+            // Set Text
+            document.getElementById('qType').innerText = data.type;
+            document.getElementById('qText').innerHTML = data.text;
+            document.getElementById('feedback').className = "hidden mt-4 p-4 rounded-xl text-center font-bold";
+            
+            // Reset UI
+            const optsContainer = document.getElementById('optionsContainer');
+            const essayContainer = document.getElementById('essayContainer');
+            optsContainer.innerHTML = '';
+            
+            if (data.isEssay) {
+                optsContainer.classList.add('hidden');
+                essayContainer.classList.remove('hidden');
+                document.getElementById('essayInput').value = '';
+            } else {
+                essayContainer.classList.add('hidden');
+                optsContainer.classList.remove('hidden');
+                
+                // Generate Options
+                data.options.forEach((opt, index) => {
+                    const btn = document.createElement('button');
+                    btn.className = "w-full text-left p-3 rounded-lg border border-slate-200 hover:bg-indigo-50 hover:border-indigo-300 transition-all text-slate-700";
+                    btn.innerText = opt;
+                    btn.onclick = () => checkAnswer(index, btn);
+                    optsContainer.appendChild(btn);
+                });
+            }
+
+            // Show Modal
+            document.getElementById('quizModal').classList.add('active');
+        }
+
+        function checkAnswer(selectedIndex, btnElement) {
+            const feedback = document.getElementById('feedback');
+            const buttons = document.getElementById('optionsContainer').children;
+
+            // Disable all buttons
+            for (let btn of buttons) {
+                btn.disabled = true;
+                btn.classList.add('opacity-70');
+            }
+
+            feedback.classList.remove('hidden');
+
+            if (selectedIndex === currentQ.correctIndex) {
+                // Benar
+                btnElement.classList.remove('border-slate-200', 'hover:bg-indigo-50');
+                btnElement.classList.add('bg-green-500', 'text-white', 'border-green-600');
+                feedback.innerHTML = "<i class='fas fa-check-circle'></i> Jawaban BENAR!";
+                feedback.classList.add('bg-green-100', 'text-green-700');
+            } else {
+                // Salah
+                btnElement.classList.remove('border-slate-200', 'hover:bg-indigo-50');
+                btnElement.classList.add('bg-red-500', 'text-white', 'border-red-600');
+                
+                // Highlight yang benar
+                buttons[currentQ.correctIndex].classList.remove('border-slate-200');
+                buttons[currentQ.correctIndex].classList.add('bg-green-500', 'text-white', 'border-green-600');
+
+                feedback.innerHTML = "<i class='fas fa-times-circle'></i> Jawaban SALAH!";
+                feedback.classList.add('bg-red-100', 'text-red-700');
+            }
+        }
+
+        function checkEssay() {
+            const input = document.getElementById('essayInput').value.toLowerCase().trim();
+            const feedback = document.getElementById('feedback');
+            
+            feedback.classList.remove('hidden');
+
+            if (input === currentQ.correctAnswer.toLowerCase()) {
+                feedback.innerHTML = "<i class='fas fa-check-circle'></i> Jawaban BENAR! (is protected)";
+                feedback.className = "mt-4 p-4 rounded-xl text-center font-bold bg-green-100 text-green-700";
+            } else {
+                feedback.innerHTML = `<i class='fas fa-times-circle'></i> Kurang tepat.<br>Jawaban benar: <b>${currentQ.correctAnswer}</b>`;
+                feedback.className = "mt-4 p-4 rounded-xl text-center font-bold bg-red-100 text-red-700";
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('quizModal').classList.remove('active');
+        }
+
+        // Close on ESC key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") closeModal();
+        });
+
+        // Search Filter (Same as before)
         function filterTable() {
-            var input, filter, table, tr, td, i, txtValue;
+            var input, filter, table, tr, td, i;
             input = document.getElementById("searchInput");
             filter = input.value.toUpperCase();
             table = document.getElementById("kisiTable");
             tr = table.getElementsByTagName("tr");
-
-            for (i = 1; i < tr.length; i++) { // Start from 1 to skip header
-                // Search in Material (col 1) and Indicator (col 2)
+            for (i = 1; i < tr.length; i++) {
                 var tdMateri = tr[i].getElementsByTagName("td")[1];
                 var tdIndikator = tr[i].getElementsByTagName("td")[2];
-                
                 if (tdMateri || tdIndikator) {
                     var txtMateri = tdMateri.textContent || tdMateri.innerText;
                     var txtIndikator = tdIndikator.textContent || tdIndikator.innerText;
-                    
                     if (txtMateri.toUpperCase().indexOf(filter) > -1 || txtIndikator.toUpperCase().indexOf(filter) > -1) {
                         tr[i].style.display = "";
                     } else {
