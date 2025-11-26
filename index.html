@@ -74,6 +74,30 @@
     ✨ Jangan panik lihat kisi-kisi... paniklah kalau belum belajar. ✨
   </div>
 </div>
+    /* ================== MARQUEE CENTER ================== */
+.marquee-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;        /* posisi ke tengah */
+  background: #eef6ff;
+  padding: 8px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.marquee {
+  font-weight: bold;
+  font-size: 16px;
+  white-space: nowrap;
+  display: inline-block;
+  animation: scroll-left 18s linear infinite;
+}
+
+.marquee-wrap:hover .marquee {
+  animation-play-state: paused;
+  cursor: pointer;
+}
 
         <!-- Toolbar -->
         <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
@@ -612,31 +636,7 @@
     marquee.textContent = quotes[index];
     index = (index + 1) % quotes.length;
   }
-        /* ================== MARQUEE CENTER ================== */
-.marquee-wrap {
-  width: 100%;
-  display: flex;
-  justify-content: center;        /* posisi ke tengah */
-  background: #eef6ff;
-  padding: 8px 0;
-  border-radius: 8px;
-  overflow: hidden;
-  margin: 10px 0;
-}
-
-.marquee {
-  font-weight: bold;
-  font-size: 16px;
-  white-space: nowrap;
-  display: inline-block;
-  animation: scroll-left 18s linear infinite;
-}
-
-.marquee-wrap:hover .marquee {
-  animation-play-state: paused;
-  cursor: pointer;
-}
-
+    
 @keyframes scroll-left {
   0% {
     transform: translateX(100%);  /* mulai dari kanan */
