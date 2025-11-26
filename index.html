@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kisi-Kisi & Latihan SAS Inggris - MTs Al Istiqomah</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
@@ -17,46 +14,20 @@
             background: linear-gradient(135deg, #f3f4f6 0%, #e0e7ff 100%);
             min-height: 100vh;
         }
-
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #818cf8; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
-
-        /* Animations */
-        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
-        .slide-up { opacity: 0; animation: slideUp 0.6s ease-out forwards; }
-        
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
         .glass-panel {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
         }
-
-        /* Modal Styles */
-        .modal {
-            transition: opacity 0.3s ease-in-out;
-            opacity: 0;
-            pointer-events: none;
-        }
-        .modal.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .modal-content {
-            transform: scale(0.95);
-            transition: transform 0.3s ease-in-out;
-        }
-        .modal.active .modal-content {
-            transform: scale(1);
-        }
-
-        /* Print Styles */
+        .modal { transition: opacity 0.3s ease-in-out; opacity: 0; pointer-events: none; }
+        .modal.active { opacity: 1; pointer-events: auto; }
+        .modal-content { transform: scale(0.95); transition: transform 0.3s ease-in-out; }
+        .modal.active .modal-content { transform: scale(1); }
         @media print {
             body { background: white; }
             .no-print { display: none !important; }
@@ -70,10 +41,9 @@
 <body class="p-4 md:p-8 text-slate-800">
 
     <div class="max-w-6xl mx-auto">
-        <!-- Header Section -->
-        <div class="glass-panel rounded-2xl p-6 mb-8 text-center fade-in relative overflow-hidden">
+        <!-- Header -->
+        <div class="glass-panel rounded-2xl p-6 mb-8 text-center relative overflow-hidden">
             <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
-            
             <div class="flex flex-col md:flex-row justify-between items-center mb-6">
                 <div class="flex items-center gap-4 mb-4 md:mb-0">
                     <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 text-2xl shadow-inner">
@@ -92,7 +62,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm border-t border-slate-200 pt-4">
                 <div><span class="block text-slate-400 text-xs">Hari / Tanggal</span><span class="font-medium">Sesuai Jadwal</span></div>
                 <div><span class="block text-slate-400 text-xs">Waktu</span><span class="font-medium">90 Menit</span></div>
@@ -102,7 +71,7 @@
         </div>
 
         <!-- Toolbar -->
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-6 fade-in" style="animation-delay: 0.2s;">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
             <div class="relative w-full md:w-96">
                 <i class="fas fa-search absolute left-4 top-3.5 text-slate-400"></i>
                 <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Cari materi..." 
@@ -114,7 +83,7 @@
         </div>
 
         <!-- Table Container -->
-        <div class="glass-panel rounded-2xl overflow-hidden shadow-xl fade-in" style="animation-delay: 0.4s;">
+        <div class="glass-panel rounded-2xl overflow-hidden shadow-xl">
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse" id="kisiTable">
                     <thead>
@@ -123,90 +92,338 @@
                             <th class="p-4 font-semibold w-1/4">Materi / Genre</th>
                             <th class="p-4 font-semibold">Indikator Soal</th>
                             <th class="p-4 font-semibold text-center w-20">No. Soal</th>
-                            <!-- Kolom baru untuk tombol latihan -->
                             <th class="p-4 font-semibold text-center w-24 no-print">Latihan</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100 text-sm text-slate-600">
                         
-                        <!-- Row 1: Elephant -->
-                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up">
+                        <!-- TEXT 1: Elephant (1-5) -->
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
                             <td class="p-4 text-center font-bold text-slate-400">1</td>
-                            <td class="p-4 font-medium text-slate-800">
-                                <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs mr-2">Reading</span>
-                                Descriptive Text
-                            </td>
-                            <td class="p-4">Disajikan teks deskriptif (Sumatran Elephant), siswa dapat mengidentifikasi ciri-ciri fisik hewan tersebut.</td>
+                            <td class="p-4 font-medium"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs mr-2">Reading</span>Descriptive</td>
+                            <td class="p-4">Mengidentifikasi ciri fisik hewan (Sumatran Elephant).</td>
                             <td class="p-4 text-center font-bold">1</td>
-                            <td class="p-4 text-center no-print">
-                                <button onclick="openQuestion(1)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow transition-all active:scale-95" title="Kerjakan Latihan Soal">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                            </td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(1)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">2</td>
+                            <td class="p-4 font-medium">Descriptive</td>
+                            <td class="p-4">Menentukan makanan hewan tersebut.</td>
+                            <td class="p-4 text-center font-bold">2</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(2)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">3</td>
+                            <td class="p-4 font-medium">Descriptive</td>
+                            <td class="p-4">Menentukan makna frasa/referensi kata (gray skin).</td>
+                            <td class="p-4 text-center font-bold">3</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(3)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">4</td>
+                            <td class="p-4 font-medium">Descriptive</td>
+                            <td class="p-4">Mengidentifikasi habitat hewan.</td>
+                            <td class="p-4 text-center font-bold">4</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(4)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">5</td>
+                            <td class="p-4 font-medium">Vocabulary</td>
+                            <td class="p-4">Menentukan sinonim kata (Endangered).</td>
+                            <td class="p-4 text-center font-bold">5</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(5)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
                         </tr>
 
-                        <!-- Row 2: Weather (Borobudur) -->
-                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up" style="animation-delay: 0.15s">
+                        <!-- TEXT 2: Komodo (6-10) -->
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">6</td>
+                            <td class="p-4 font-medium"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs mr-2">Reading</span>Report</td>
+                            <td class="p-4">Mengklasifikasikan jenis hewan (Komodo).</td>
+                            <td class="p-4 text-center font-bold">6</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(6)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">7</td>
+                            <td class="p-4 font-medium">Report</td>
+                            <td class="p-4">Menentukan lokasi habitat hewan.</td>
+                            <td class="p-4 text-center font-bold">7</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(7)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">8</td>
+                            <td class="p-4 font-medium"><span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded text-xs mr-2">Grammar</span>Tenses</td>
+                            <td class="p-4">Identifikasi Present Tense (Habitual action).</td>
+                            <td class="p-4 text-center font-bold">8</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(8)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">9</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Penggunaan Preposition of place (in/on/at).</td>
+                            <td class="p-4 text-center font-bold">9</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(9)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">10</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Identifikasi kalimat Passive Voice.</td>
+                            <td class="p-4 text-center font-bold">10</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(10)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+
+                        <!-- TEXT 3: Borobudur (11-15) -->
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">11</td>
+                            <td class="p-4 font-medium"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs mr-2">Reading</span>Recount</td>
+                            <td class="p-4">Menentukan waktu kejadian (Last week).</td>
+                            <td class="p-4 text-center font-bold">11</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(11)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
                             <td class="p-4 text-center font-bold text-slate-400">12</td>
-                            <td class="p-4 font-medium text-slate-800">
-                                <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs mr-2">Reading</span>
-                                Recount Text
-                            </td>
-                            <td class="p-4">Mengidentifikasi informasi rinci tentang cuaca/suasana (Borobudur Trip).</td>
+                            <td class="p-4 font-medium">Recount</td>
+                            <td class="p-4">Informasi rinci tentang cuaca.</td>
                             <td class="p-4 text-center font-bold">12</td>
-                            <td class="p-4 text-center no-print">
-                                <button onclick="openQuestion(12)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow transition-all active:scale-95">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                            </td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(12)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">13</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Identifikasi Tense dari Verb-2 (took).</td>
+                            <td class="p-4 text-center font-bold">13</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(13)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">14</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Identifikasi Simple Past Tense.</td>
+                            <td class="p-4 text-center font-bold">14</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(14)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                         <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">15</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Identifikasi Past Continuous Tense.</td>
+                            <td class="p-4 text-center font-bold">15</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(15)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
                         </tr>
 
-                        <!-- Row 3: Moral (Golden Egg) -->
-                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up" style="animation-delay: 0.2s">
+                        <!-- TEXT 4: Village (16-20) -->
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">16</td>
+                            <td class="p-4 font-medium"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs mr-2">Reading</span>Recount</td>
+                            <td class="p-4">Menentukan aktivitas penulis di desa.</td>
+                            <td class="p-4 text-center font-bold">16</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(16)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">17</td>
+                            <td class="p-4 font-medium">Recount</td>
+                            <td class="p-4">Menentukan aktivitas sedang berlangsung (Continuous).</td>
+                            <td class="p-4 text-center font-bold">17</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(17)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">18</td>
+                            <td class="p-4 font-medium">Reading</td>
+                            <td class="p-4">Inference (Kesimpulan) perasaan penulis.</td>
+                            <td class="p-4 text-center font-bold">18</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(18)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">19</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Analisis kalimat Past Continuous Tense.</td>
+                            <td class="p-4 text-center font-bold">19</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(19)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">20</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Mengubah kalimat aktif ke Pasif (Past).</td>
+                            <td class="p-4 text-center font-bold">20</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(20)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+
+                        <!-- TEXT 5: Golden Egg (21-25) -->
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">21</td>
+                            <td class="p-4 font-medium"><span class="bg-orange-100 text-orange-700 px-2 py-0.5 rounded text-xs mr-2">Literacy</span>Narrative</td>
+                            <td class="p-4">Mengidentifikasi temuan petani (Golden Egg).</td>
+                            <td class="p-4 text-center font-bold">21</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(21)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">22</td>
+                            <td class="p-4 font-medium">Narrative</td>
+                            <td class="p-4">Menentukan penyebab perubahan nasib.</td>
+                            <td class="p-4 text-center font-bold">22</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(22)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">23</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Menentukan Tense dominan dalam Narrative.</td>
+                            <td class="p-4 text-center font-bold">23</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(23)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">24</td>
+                            <td class="p-4 font-medium">Narrative</td>
+                            <td class="p-4">Menentukan penyebab konflik/kegagalan.</td>
+                            <td class="p-4 text-center font-bold">24</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(24)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
                             <td class="p-4 text-center font-bold text-slate-400">25</td>
-                            <td class="p-4 font-medium text-slate-800">
-                                <span class="bg-orange-100 text-orange-700 px-2 py-0.5 rounded text-xs mr-2">Literacy</span>
-                                Narrative Text
-                            </td>
-                            <td class="p-4">Menentukan pesan moral (Moral Value) dari teks naratif (The Golden Egg).</td>
+                            <td class="p-4 font-medium">Narrative</td>
+                            <td class="p-4">Menentukan Pesan Moral (Moral Value).</td>
                             <td class="p-4 text-center font-bold">25</td>
-                            <td class="p-4 text-center no-print">
-                                <button onclick="openQuestion(25)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow transition-all active:scale-95">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                            </td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(25)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
                         </tr>
 
-                        <!-- Row 4: Grammar (Passive) -->
-                        <tr class="hover:bg-indigo-50/50 transition-colors slide-up" style="animation-delay: 0.25s">
+                        <!-- GRAMMAR DRILL (26-40) -->
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">26</td>
+                            <td class="p-4 font-medium"><span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded text-xs mr-2">Grammar</span>Drill</td>
+                            <td class="p-4">Simple Present Tense (She ...).</td>
+                            <td class="p-4 text-center font-bold">26</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(26)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                         <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">27</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Simple Past Tense (Yesterday).</td>
+                            <td class="p-4 text-center font-bold">27</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(27)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                         <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">28</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Passive Voice - Past (The cake...).</td>
+                            <td class="p-4 text-center font-bold">28</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(28)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">29</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Past Continuous (While...).</td>
+                            <td class="p-4 text-center font-bold">29</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(29)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">30</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Passive Voice - Present (Every week).</td>
+                            <td class="p-4 text-center font-bold">30</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(30)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                         <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">31</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Simple Present Tense (Usually).</td>
+                            <td class="p-4 text-center font-bold">31</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(31)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                         <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">32</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Past Continuous (When it started to rain).</td>
+                            <td class="p-4 text-center font-bold">32</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(32)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                         <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">33</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Passive Voice - Past (The window...).</td>
+                            <td class="p-4 text-center font-bold">33</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(33)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">34</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Simple Past Tense (I ... my phone).</td>
+                            <td class="p-4 text-center font-bold">34</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(34)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">35</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Present Continuous Tense (Now).</td>
+                            <td class="p-4 text-center font-bold">35</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(35)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
                             <td class="p-4 text-center font-bold text-slate-400">36</td>
-                            <td class="p-4 font-medium text-slate-800">
-                                <span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded text-xs mr-2">Grammar</span>
-                                Passive Voice
-                            </td>
-                            <td class="p-4">Melengkapi kalimat rumpang dengan struktur Passive Voice (Past form).</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Passive Voice - Past (The homework...).</td>
                             <td class="p-4 text-center font-bold">36</td>
-                            <td class="p-4 text-center no-print">
-                                <button onclick="openQuestion(36)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow transition-all active:scale-95">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                            </td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(36)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">37</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Past Continuous (When I arrived).</td>
+                            <td class="p-4 text-center font-bold">37</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(37)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">38</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Passive Voice - Present (The song...).</td>
+                            <td class="p-4 text-center font-bold">38</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(38)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">39</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Conditional Sentence Type 2 (If I ...).</td>
+                            <td class="p-4 text-center font-bold">39</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(39)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                        <tr class="hover:bg-indigo-50/50 transition-colors">
+                            <td class="p-4 text-center font-bold text-slate-400">40</td>
+                            <td class="p-4 font-medium">Grammar</td>
+                            <td class="p-4">Passive Voice - Past (The project...).</td>
+                            <td class="p-4 text-center font-bold">40</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(40)" class="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg shadow"><i class="fas fa-edit"></i></button></td>
                         </tr>
 
-                        <!-- Row 5: Essay -->
-                        <tr class="bg-indigo-100/50 hover:bg-indigo-100 transition-colors slide-up border-l-4 border-indigo-500" style="animation-delay: 0.3s">
+                        <!-- ESSAY (41-45) -->
+                        <tr class="bg-indigo-100/50 hover:bg-indigo-100 transition-colors border-l-4 border-indigo-500">
                             <td class="p-4 text-center font-bold text-slate-400">41</td>
-                            <td class="p-4 font-medium text-slate-800">
-                                <span class="bg-red-100 text-red-700 px-2 py-0.5 rounded text-xs mr-2">Writing</span>
-                                Essay
-                            </td>
-                            <td class="p-4">Melengkapi kalimat rumpang (Uraian) dengan Passive Voice konteks pelestarian.</td>
+                            <td class="p-4 font-medium"><span class="bg-red-100 text-red-700 px-2 py-0.5 rounded text-xs mr-2">Writing</span>Essay</td>
+                            <td class="p-4">Passive Voice - Present (Rhinoceros).</td>
                             <td class="p-4 text-center font-bold">41</td>
-                            <td class="p-4 text-center no-print">
-                                <button onclick="openQuestion(41)" class="bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded-lg shadow transition-all active:scale-95">
-                                    <i class="fas fa-pen-fancy"></i>
-                                </button>
-                            </td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(41)" class="bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded-lg shadow"><i class="fas fa-pen-fancy"></i></button></td>
+                        </tr>
+                        <tr class="bg-indigo-100/50 hover:bg-indigo-100 transition-colors border-l-4 border-indigo-500">
+                            <td class="p-4 text-center font-bold text-slate-400">42</td>
+                            <td class="p-4 font-medium">Essay</td>
+                            <td class="p-4">Past Continuous (Hikers / Storm).</td>
+                            <td class="p-4 text-center font-bold">42</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(42)" class="bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded-lg shadow"><i class="fas fa-pen-fancy"></i></button></td>
+                        </tr>
+                        <tr class="bg-indigo-100/50 hover:bg-indigo-100 transition-colors border-l-4 border-indigo-500">
+                            <td class="p-4 text-center font-bold text-slate-400">43</td>
+                            <td class="p-4 font-medium">Essay</td>
+                            <td class="p-4">Passive Voice - Past (Sword / Hidden).</td>
+                            <td class="p-4 text-center font-bold">43</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(43)" class="bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded-lg shadow"><i class="fas fa-pen-fancy"></i></button></td>
+                        </tr>
+                        <tr class="bg-indigo-100/50 hover:bg-indigo-100 transition-colors border-l-4 border-indigo-500">
+                            <td class="p-4 text-center font-bold text-slate-400">44</td>
+                            <td class="p-4 font-medium">Essay</td>
+                            <td class="p-4">Passive Voice - Present (Wild Animals / Hunt).</td>
+                            <td class="p-4 text-center font-bold">44</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(44)" class="bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded-lg shadow"><i class="fas fa-pen-fancy"></i></button></td>
+                        </tr>
+                        <tr class="bg-indigo-100/50 hover:bg-indigo-100 transition-colors border-l-4 border-indigo-500">
+                            <td class="p-4 text-center font-bold text-slate-400">45</td>
+                            <td class="p-4 font-medium">Essay</td>
+                            <td class="p-4">Past Continuous (Villagers / Celebrate).</td>
+                            <td class="p-4 text-center font-bold">45</td>
+                            <td class="p-4 text-center no-print"><button onclick="openQuestion(45)" class="bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded-lg shadow"><i class="fas fa-pen-fancy"></i></button></td>
                         </tr>
 
                     </tbody>
@@ -218,34 +435,19 @@
         </div>
     </div>
 
-    <!-- MODAL POPUP (Hidden by default) -->
+    <!-- MODAL POPUP -->
     <div id="quizModal" class="modal fixed inset-0 z-50 flex items-center justify-center p-4">
-        <!-- Backdrop -->
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeModal()"></div>
-        
-        <!-- Content -->
-        <div class="modal-content relative bg-white w-full max-w-lg rounded-2xl shadow-2xl p-6 md:p-8">
+        <div class="modal-content relative bg-white w-full max-w-lg rounded-2xl shadow-2xl p-6 md:p-8 overflow-y-auto max-h-[90vh]">
             <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
                 <i class="fas fa-times text-xl"></i>
             </button>
-
-            <!-- Question Header -->
             <div class="mb-6">
                 <span id="qType" class="text-xs font-bold tracking-wider uppercase text-indigo-500 mb-1 block">Tipe Soal</span>
-                <h3 id="qText" class="text-lg md:text-xl font-bold text-slate-800 leading-relaxed">
-                    <!-- Soal akan muncul di sini -->
-                </h3>
+                <h3 id="qText" class="text-lg md:text-xl font-bold text-slate-800 leading-relaxed"></h3>
             </div>
-
-            <!-- Options Container -->
-            <div id="optionsContainer" class="space-y-3">
-                <!-- Pilihan jawaban akan digenerate via JS -->
-            </div>
-
-            <!-- Feedback Area -->
+            <div id="optionsContainer" class="space-y-3"></div>
             <div id="feedback" class="hidden mt-4 p-4 rounded-xl text-center font-bold"></div>
-
-             <!-- Essay Check -->
             <div id="essayContainer" class="hidden space-y-4">
                  <textarea id="essayInput" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500" placeholder="Ketik jawabanmu..."></textarea>
                  <button onclick="checkEssay()" class="w-full bg-indigo-600 text-white py-2 rounded-lg font-bold hover:bg-indigo-700">Cek Jawaban</button>
@@ -254,79 +456,69 @@
     </div>
 
     <script>
-        // --- DATA BANK SOAL ---
         const questionBank = {
-            1: {
-                type: "Pilihan Ganda - Descriptive Text",
-                text: "The Sumatran elephant is smaller than other Asian elephants. It has gray skin, large ears, and a long trunk.<br><br><b>Question:</b> What does the Sumatran elephant look like?",
-                options: [
-                    "A. It is big and green",
-                    "B. It is small and gray",
-                    "C. It is brown and furry",
-                    "D. It is black and short"
-                ],
-                correctIndex: 1, // 0=A, 1=B, 2=C, 3=D
-                isEssay: false
-            },
-            12: {
-                type: "Pilihan Ganda - Recount Text",
-                text: "Last week, my family went to Borobudur Temple... The weather was sunny and bright.<br><br><b>Question:</b> What was the weather like?",
-                options: [
-                    "A. Rainy",
-                    "B. Cloudy",
-                    "C. Sunny and bright",
-                    "D. Windy"
-                ],
-                correctIndex: 2,
-                isEssay: false
-            },
-            25: {
-                type: "Pilihan Ganda - Narrative Text",
-                text: "The farmer became rich, but one day he killed the hen because he was greedy. After that, no golden eggs appeared again.<br><br><b>Question:</b> The moral of the story is ____.",
-                options: [
-                    "A. Don’t be greedy",
-                    "B. Work harder",
-                    "C. Be brave",
-                    "D. Always study"
-                ],
-                correctIndex: 0,
-                isEssay: false
-            },
-            36: {
-                type: "Grammar Drill - Passive Voice",
-                text: "The window ______ by the wind last night.",
-                options: [
-                    "A. broke",
-                    "B. was broken",
-                    "C. is broken",
-                    "D. breaks"
-                ],
-                correctIndex: 1,
-                isEssay: false
-            },
-            41: {
-                type: "Uraian / Essay",
-                text: "Complete the sentence with correct Passive Voice:<br><br>The rare Javan rhinoceros ______ (protect) by the government to prevent extinction.",
-                correctAnswer: "is protected",
-                isEssay: true
-            }
+            1: { type: "Descriptive Text", text: "Text: The Sumatran elephant is smaller than other Asian elephants. It has gray skin...<br><b>Question:</b> What does the Sumatran elephant look like?", options: ["It is big and green", "It is small and gray", "It is brown and furry", "It is black and short"], correctIndex: 1 },
+            2: { type: "Descriptive Text", text: "Text: The elephant lives in tropical forests and eats grass, fruits, and leaves.<br><b>Question:</b> What does the elephant eat?", options: ["Meat", "Grass and fruits", "Fish", "Insects"], correctIndex: 1 },
+            3: { type: "Descriptive Text", text: "Text: It has gray skin.<br><b>Question:</b> 'It has gray skin' means the elephant's skin is _______.", options: ["Gray", "Black", "White", "Yellow"], correctIndex: 0 },
+            4: { type: "Descriptive Text", text: "Text: The elephant lives in tropical forests.<br><b>Question:</b> Where does the Sumatran elephant live?", options: ["In ocean", "In tropical forests", "In the desert", "On the mountain"], correctIndex: 1 },
+            5: { type: "Vocabulary", text: "<b>Question:</b> The word 'endangered' means _______.", options: ["Protected", "Rare and in danger", "Common", "Healthy"], correctIndex: 1 },
+            
+            6: { type: "Report Text", text: "Text: The Komodo dragon is the largest lizard in the world.<br><b>Question:</b> What is the Komodo dragon?", options: ["A kind of snake", "The largest lizard", "A type of bird", "A big mammal"], correctIndex: 1 },
+            7: { type: "Report Text", text: "Text: The Komodo dragon lives in Indonesia.<br><b>Question:</b> Where do Komodo dragons live?", options: ["In Japan", "In Indonesia", "In Africa", "In Australia"], correctIndex: 1 },
+            8: { type: "Grammar", text: "Text: They use their sharp teeth.<br><b>Question:</b> The tense used is ______.", options: ["Present tense", "Past tense", "Future tense", "Passive voice"], correctIndex: 0 },
+            9: { type: "Grammar", text: "<b>Question:</b> The Komodo dragon is found ______ Indonesia.", options: ["On", "At", "In", "From"], correctIndex: 2 },
+            10: { type: "Grammar", text: "<b>Question:</b> Which sentence is passive voice?", options: ["Komodo dragons eat deer.", "Deer are eaten by Komodo dragons.", "They hunt their prey.", "Komodo dragons live on islands."], correctIndex: 1 },
+
+            11: { type: "Recount Text", text: "Text: Last week, my family went to Borobudur Temple.<br><b>Question:</b> When did the writer visit Borobudur?", options: ["Every week", "Last week", "Next week", "Yesterday"], correctIndex: 1 },
+            12: { type: "Recount Text", text: "Text: The weather was sunny and bright.<br><b>Question:</b> What was the weather like?", options: ["Rainy", "Cloudy", "Sunny and bright", "Windy"], correctIndex: 2 },
+            13: { type: "Grammar", text: "<b>Question:</b> 'We took many photos.' The verb took is in ______ tense.", options: ["Present", "Past", "Future", "Continuous"], correctIndex: 1 },
+            14: { type: "Grammar", text: "<b>Question:</b> 'We left early in the morning.' uses...", options: ["Past Tense", "Present Tense", "Future Tense", "Passive Voice"], correctIndex: 0 },
+            15: { type: "Grammar", text: "<b>Question:</b> Which of the following sentences uses past continuous tense?", options: ["We left early.", "We were taking photos.", "We arrive early.", "We take photos."], correctIndex: 1 },
+
+            16: { type: "Recount Text", text: "Text: I helped my grandmother cook traditional food.<br><b>Question:</b> What did the writer do in the village?", options: ["Played football", "Cooked with grandmother", "Went shopping", "Studied"], correctIndex: 1 },
+            17: { type: "Recount Text", text: "Text: I saw some children swimming happily.<br><b>Question:</b> What were the children doing at the river?", options: ["They swim", "They were swimming", "They swam", "They are swimming"], correctIndex: 1 },
+            18: { type: "Reading Inference", text: "Text: The air was fresh...<br><b>Question:</b> This shows that the writer ______.", options: ["Likes the city air", "Enjoyed the nature", "Wanted to go home", "Felt tired"], correctIndex: 1 },
+            19: { type: "Grammar", text: "<b>Question:</b> The sentence 'I was walking to the river' uses ______.", options: ["Present continuous tense", "Past continuous tense", "Past tense", "Passive voice"], correctIndex: 1 },
+            20: { type: "Grammar", text: "<b>Question:</b> The correct passive voice of 'I cooked traditional food' is ______.", options: ["Traditional food cooked by me.", "Traditional food was cooked by me.", "Traditional food is cooked by me.", "Traditional food are cooked by me."], correctIndex: 1 },
+
+            21: { type: "Narrative Text", text: "Text: One day, they found a golden egg in their chicken's nest.<br><b>Question:</b> What did the farmer find?", options: ["A silver egg", "A golden egg", "A diamond", "A pearl"], correctIndex: 1 },
+            22: { type: "Narrative Text", text: "Text: The farmer became rich because the hen laid a golden egg.<br><b>Question:</b> What made the farmer rich?", options: ["Selling rice", "Selling golden eggs", "Finding gold in the river", "Buying hens"], correctIndex: 1 },
+            23: { type: "Grammar", text: "<b>Question:</b> The tense used in the story (Once upon a time...) is ______.", options: ["Present tense", "Past tense", "Passive voice", "Future tense"], correctIndex: 1 },
+            24: { type: "Narrative Text", text: "Text: He killed the hen because he was greedy.<br><b>Question:</b> Why did the farmer lose everything?", options: ["Because he was kind", "Because he was greedy", "Because he was lazy", "Because he was poor"], correctIndex: 1 },
+            25: { type: "Narrative Text", text: "<b>Question:</b> The moral of the story is ______.", options: ["Don’t be greedy", "Work harder", "Be brave", "Always study"], correctIndex: 0 },
+
+            26: { type: "Grammar Drill", text: "<b>Question:</b> She ______ her homework every evening.", options: ["do", "does", "did", "doing"], correctIndex: 1 },
+            27: { type: "Grammar Drill", text: "<b>Question:</b> They ______ football yesterday afternoon.", options: ["play", "are playing", "played", "plays"], correctIndex: 2 },
+            28: { type: "Grammar Drill", text: "<b>Question:</b> The cake ______ by my mother yesterday.", options: ["is made", "was made", "were made", "makes"], correctIndex: 1 },
+            29: { type: "Grammar Drill", text: "<b>Question:</b> While I ______ TV, my brother ______ a book.", options: ["watched – reads", "am watching – read", "was watching – was reading", "watch – read"], correctIndex: 2 },
+            30: { type: "Grammar Drill", text: "<b>Question:</b> The letter ______ by her every week.", options: ["was written", "is written", "are written", "writes"], correctIndex: 1 },
+            31: { type: "Grammar Drill", text: "<b>Question:</b> He usually ______ breakfast at 7 a.m.", options: ["have", "had", "has", "having"], correctIndex: 2 },
+            32: { type: "Grammar Drill", text: "<b>Question:</b> They ______ in the park when it started to rain.", options: ["walk", "were walking", "walks", "walked"], correctIndex: 1 },
+            33: { type: "Grammar Drill", text: "<b>Question:</b> The window ______ by the wind last night.", options: ["broke", "was broken", "is broken", "breaks"], correctIndex: 1 },
+            34: { type: "Grammar Drill", text: "<b>Question:</b> I ______ my phone yesterday.", options: ["lose", "losing", "lost", "was lose"], correctIndex: 2 },
+            35: { type: "Grammar Drill", text: "<b>Question:</b> She ______ in the kitchen now.", options: ["cooks", "is cooking", "cooked", "was cooking"], correctIndex: 1 },
+            36: { type: "Grammar Drill", text: "<b>Question:</b> The homework ______ by the students yesterday.", options: ["did", "was done", "is done", "are done"], correctIndex: 1 },
+            37: { type: "Grammar Drill", text: "<b>Question:</b> When I arrived, they ______ dinner.", options: ["were having", "had", "have", "are having"], correctIndex: 0 },
+            38: { type: "Grammar Drill", text: "<b>Question:</b> The song ______ by a famous singer.", options: ["sing", "is sung", "sang", "was sing"], correctIndex: 1 },
+            39: { type: "Grammar Drill", text: "<b>Question:</b> If I ______ time, I would visit you.", options: ["have", "had", "has", "having"], correctIndex: 1 },
+            40: { type: "Grammar Drill", text: "<b>Question:</b> The project ______ before the deadline yesterday.", options: ["finish", "was finished", "finishes", "finishing"], correctIndex: 1 },
+
+            41: { type: "Essay", text: "Complete with Passive Voice:<br>The rare Javan rhinoceros ______ (protect) by the government.", correctAnswer: "is protected", isEssay: true },
+            42: { type: "Essay", text: "Complete with Past Continuous:<br>When the storm came, the hikers ______ (cross) the bridge.", correctAnswer: "were crossing", isEssay: true },
+            43: { type: "Essay", text: "Complete with Passive Voice:<br>The magical sword ______ (hide) in a secret cave long ago.", correctAnswer: "was hidden", isEssay: true },
+            44: { type: "Essay", text: "Complete with Passive Voice:<br>Many wild animals ______ (hunt) illegally despite strict laws.", correctAnswer: "are hunted", isEssay: true },
+            45: { type: "Essay", text: "Complete with Past Continuous:<br>While the villagers ______ (celebrate) the festival, explorers arrived.", correctAnswer: "were celebrating", isEssay: true }
         };
 
-        // --- LOGIC ---
         let currentQ = null;
 
         function openQuestion(id) {
             const data = questionBank[id];
-            if (!data) return; // Jika soal belum ada
-            
+            if (!data) return; 
             currentQ = data;
-            
-            // Set Text
             document.getElementById('qType').innerText = data.type;
             document.getElementById('qText').innerHTML = data.text;
             document.getElementById('feedback').className = "hidden mt-4 p-4 rounded-xl text-center font-bold";
-            
-            // Reset UI
             const optsContainer = document.getElementById('optionsContainer');
             const essayContainer = document.getElementById('essayContainer');
             optsContainer.innerHTML = '';
@@ -338,8 +530,6 @@
             } else {
                 essayContainer.classList.add('hidden');
                 optsContainer.classList.remove('hidden');
-                
-                // Generate Options
                 data.options.forEach((opt, index) => {
                     const btn = document.createElement('button');
                     btn.className = "w-full text-left p-3 rounded-lg border border-slate-200 hover:bg-indigo-50 hover:border-indigo-300 transition-all text-slate-700";
@@ -348,38 +538,24 @@
                     optsContainer.appendChild(btn);
                 });
             }
-
-            // Show Modal
             document.getElementById('quizModal').classList.add('active');
         }
 
         function checkAnswer(selectedIndex, btnElement) {
             const feedback = document.getElementById('feedback');
             const buttons = document.getElementById('optionsContainer').children;
-
-            // Disable all buttons
-            for (let btn of buttons) {
-                btn.disabled = true;
-                btn.classList.add('opacity-70');
-            }
-
+            for (let btn of buttons) { btn.disabled = true; btn.classList.add('opacity-70'); }
             feedback.classList.remove('hidden');
-
             if (selectedIndex === currentQ.correctIndex) {
-                // Benar
-                btnElement.classList.remove('border-slate-200', 'hover:bg-indigo-50');
-                btnElement.classList.add('bg-green-500', 'text-white', 'border-green-600');
+                btnElement.classList.replace('border-slate-200', 'border-green-600');
+                btnElement.classList.add('bg-green-500', 'text-white');
                 feedback.innerHTML = "<i class='fas fa-check-circle'></i> Jawaban BENAR!";
                 feedback.classList.add('bg-green-100', 'text-green-700');
             } else {
-                // Salah
-                btnElement.classList.remove('border-slate-200', 'hover:bg-indigo-50');
-                btnElement.classList.add('bg-red-500', 'text-white', 'border-red-600');
-                
-                // Highlight yang benar
-                buttons[currentQ.correctIndex].classList.remove('border-slate-200');
-                buttons[currentQ.correctIndex].classList.add('bg-green-500', 'text-white', 'border-green-600');
-
+                btnElement.classList.replace('border-slate-200', 'border-red-600');
+                btnElement.classList.add('bg-red-500', 'text-white');
+                buttons[currentQ.correctIndex].classList.replace('border-slate-200', 'border-green-600');
+                buttons[currentQ.correctIndex].classList.add('bg-green-500', 'text-white');
                 feedback.innerHTML = "<i class='fas fa-times-circle'></i> Jawaban SALAH!";
                 feedback.classList.add('bg-red-100', 'text-red-700');
             }
@@ -388,11 +564,9 @@
         function checkEssay() {
             const input = document.getElementById('essayInput').value.toLowerCase().trim();
             const feedback = document.getElementById('feedback');
-            
             feedback.classList.remove('hidden');
-
             if (input === currentQ.correctAnswer.toLowerCase()) {
-                feedback.innerHTML = "<i class='fas fa-check-circle'></i> Jawaban BENAR! (is protected)";
+                feedback.innerHTML = "<i class='fas fa-check-circle'></i> Jawaban BENAR!";
                 feedback.className = "mt-4 p-4 rounded-xl text-center font-bold bg-green-100 text-green-700";
             } else {
                 feedback.innerHTML = `<i class='fas fa-times-circle'></i> Kurang tepat.<br>Jawaban benar: <b>${currentQ.correctAnswer}</b>`;
@@ -400,33 +574,19 @@
             }
         }
 
-        function closeModal() {
-            document.getElementById('quizModal').classList.remove('active');
-        }
+        function closeModal() { document.getElementById('quizModal').classList.remove('active'); }
+        document.addEventListener('keydown', function(event) { if (event.key === "Escape") closeModal(); });
 
-        // Close on ESC key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === "Escape") closeModal();
-        });
-
-        // Search Filter (Same as before)
         function filterTable() {
-            var input, filter, table, tr, td, i;
-            input = document.getElementById("searchInput");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("kisiTable");
-            tr = table.getElementsByTagName("tr");
-            for (i = 1; i < tr.length; i++) {
+            var input = document.getElementById("searchInput").value.toUpperCase();
+            var tr = document.getElementById("kisiTable").getElementsByTagName("tr");
+            for (var i = 1; i < tr.length; i++) {
                 var tdMateri = tr[i].getElementsByTagName("td")[1];
                 var tdIndikator = tr[i].getElementsByTagName("td")[2];
                 if (tdMateri || tdIndikator) {
-                    var txtMateri = tdMateri.textContent || tdMateri.innerText;
-                    var txtIndikator = tdIndikator.textContent || tdIndikator.innerText;
-                    if (txtMateri.toUpperCase().indexOf(filter) > -1 || txtIndikator.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
+                    var txt1 = tdMateri.textContent || tdMateri.innerText;
+                    var txt2 = tdIndikator.textContent || tdIndikator.innerText;
+                    tr[i].style.display = (txt1.toUpperCase().indexOf(input) > -1 || txt2.toUpperCase().indexOf(input) > -1) ? "" : "none";
                 }       
             }
         }
